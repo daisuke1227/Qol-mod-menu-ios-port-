@@ -37,12 +37,15 @@ endif()
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 include_directories(include)
 
-# Existing definitions for mod support
+# Definitions for mod support
 add_definitions(-DSTATUS_TEXTS)
 add_definitions(-DQOLMOD_EXPORTING)
 
-# New definition to disable inline hook error check
+# Bypass inline hook error checks:
 add_definitions(-DDISABLE_INLINE_HOOK_ERROR)
+
+# Bypass reset-member macro errors (so missing members do not cause compile errors):
+add_definitions(-DDISABLE_RESET_MEMBER)
 
 # Optional: Other definitions you may wish to enable
 # add_definitions(-DQOLMOD_CUSTOM_KEYS_SETTING)
