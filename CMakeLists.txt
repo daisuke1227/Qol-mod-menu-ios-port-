@@ -13,8 +13,8 @@ project(CheatClient VERSION 1.0.0)
 file(GLOB SOURCES
     include/*.cpp
     src/*.cpp
-	src/*/*.cpp
-	src/*/*/*.cpp
+    src/*/*.cpp
+    src/*/*/*.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
@@ -23,7 +23,7 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES})
 if (WIN32)
   # Disable annoying warnings
   target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
-
+  
   # Export all symbols for better debugging
   set_target_properties(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
@@ -37,8 +37,14 @@ endif()
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 include_directories(include)
 
+# Existing definitions for mod support
 add_definitions(-DSTATUS_TEXTS)
 add_definitions(-DQOLMOD_EXPORTING)
+
+# New definition to disable inline hook error check
+add_definitions(-DDISABLE_INLINE_HOOK_ERROR)
+
+# Optional: Other definitions you may wish to enable
 # add_definitions(-DQOLMOD_CUSTOM_KEYS_SETTING)
 # add_definitions(-DCOMMENT_EMOJIS_INTEGRATION_ENABLED)
 
